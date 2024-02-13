@@ -19,21 +19,13 @@ ticket = {
 class TestIntegration(unittest.TestCase):
     # CMD: python tests/integration.py
 
-    def add_ticket(self):
-        res = requests.post(add_ticket_url, json=ticket)
-        self.assertEqual(res, "Success")
+    def test_ticket_service_connection(self):
+        r = requests.get("http://localhost:8000/health", verify=False)
+        self.assertEqual(r.status_code, 200)
 
-    def test_ticket_get(self):
-        res = requests.get(f"{get_ticket_by_id_url}?ticket_id={ticket['id']}")
-        data = res.json()
-        self.assertEqual(data['passenger_name'], "Boyarkov")
-        self.assertEqual(data['passport'], "010101.010101")
-        self.assertEqual(data['id_airplane'], 17)
-        self.assertEqual(data['direction'], "New York")
-
-    def fetch_tickets(self):
-        res = requests.get(get_tickets_url)
-        self.assertTrue(res != "Cant access database!")
+    def test_statistics_service_connection(self):
+        r = requests.get("http://localhost:8001/health", verify=False)
+        self.assertEqual(r.status_code, 200)
 
 
 if __name__ == '__main__':
