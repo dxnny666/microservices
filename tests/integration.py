@@ -40,7 +40,7 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
 
     def test_ticket_get(self):
-        res = requests.get(f"{get_ticket_by_id_url}/88")
+        res = requests.get(f"{get_ticket_by_id_url}/88").json()
         self.assertTrue('passenger_name' in res.keys())
         self.assertTrue('passport' in res.keys())
         self.assertTrue('id_airplane' in res.keys())
