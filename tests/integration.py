@@ -12,9 +12,9 @@ get_ticket_by_id_url = f'{ticket_url}/doc_by_id/'
 def check_connect():
     try:
         conn = psycopg2.connect(
-            dbname='DocumentsDB',
-            user='artemenkov',
-            password='roman',
+            dbname='TicketAirport',
+            user='postgres',
+            password='password',
             host='localhost',
             port='5432'
         )
@@ -31,11 +31,11 @@ class TestIntegration(unittest.TestCase):
         sleep(5)
         self.assertEqual(check_connect(), True)
 
-    def test_document_service_connection(self):
+    def test_ticket_service_connection(self):
         r = requests.get("http://localhost:8000/health", verify=False)
         self.assertEqual(r.status_code, 200)
 
-    def test_save_service_connection(self):
+    def test_statistics_service_connection(self):
         r = requests.get("http://localhost:8001/health", verify=False)
         self.assertEqual(r.status_code, 200)
 

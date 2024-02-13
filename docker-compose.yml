@@ -1,17 +1,17 @@
 version: '3.9'
 
 services:
-#  database:
-#    image: postgres
-#    restart: always
-#    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: password
-#      POSTGRES_DB: TicketAirport
-#    volumes:
-#      - ./pgdata:/var/lib/postgresql/data
-#    ports:
-#      - "5432:5432"
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: TicketAirport
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
 
   ticket_service:
@@ -20,8 +20,8 @@ services:
     build: ./ticket_service/
     ports:
       - "8000:80"
-#    depends_on:
-#      - database
+    depends_on:
+      - database
 
   statistics_service:
     restart: on-failure
@@ -29,5 +29,5 @@ services:
     build: ./statistics_service/
     ports:
       - "8001:80"
-#    depends_on:
-#      - database
+    depends_on:
+      - database
