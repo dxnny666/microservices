@@ -2,8 +2,8 @@ import pytest
 import requests
 import unittest
 
-ticket_url = 'https://localhost:8000'
-statistics_url = 'https://localhost:8001'
+ticket_url = 'http://localhost:8000'
+statistics_url = 'http://localhost:8001'
 add_ticket_url = f'{ticket_url}/add_ticket'
 get_ticket_by_id_url = f'{ticket_url}/get_ticket_by_id/'
 get_tickets_url = f'{ticket_url}/get_tickets'
@@ -21,7 +21,8 @@ class TestIntegration(unittest.TestCase):
     # CMD: python tests/integration.py
 
     def add_ticket(self):
-        pytest.assume(requests.post(add_ticket_url, json=ticket) == 200)
+        res = requests.post(add_ticket_url, json=ticket)
+        self.assertEqual(res, "Success")
 
     def test_ticket_get(self):
         res = requests.get(f"{get_ticket_by_id_url}/{ticket['id']}")
@@ -32,7 +33,8 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(data['direction'], "New York")
 
     def fetch_tickets(self):
-        self.assertEqual(requests.get(get_tickets_url) == 200)
+        res = requests.get(get_tickets_url)
+        self.assertTrue(res != "Cant access database!")
 
 
 if __name__ == '__main__':

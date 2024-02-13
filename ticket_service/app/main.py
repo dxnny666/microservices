@@ -3,7 +3,6 @@ import uvicorn
 from fastapi import FastAPI, Depends, HTTPException, status
 from typing import Annotated
 
-from sqlalchemy import null
 from sqlalchemy.orm import Session
 
 from database import database as database
@@ -37,7 +36,7 @@ async def get_tickets(db: db_dependency):
         result = db.query(Ticket).limit(100).all()
         return result
     except Exception as e:
-        return "cant access database!"
+        return "Cant access database!"
 
 
 @app.get("/get_ticket_by_id")
@@ -71,7 +70,7 @@ async def delete_ticket(ticket_id: int, db: db_dependency):
         ticket = db.query(Ticket).filter(Ticket.id == ticket_id).first()
         db.delete(ticket)
         return "Success"
-    except Exception:
+    except Exception as e:
         return "cant find ticket"
 
 
