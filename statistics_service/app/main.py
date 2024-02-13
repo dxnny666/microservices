@@ -16,7 +16,7 @@ database.Base.metadata.create_all(bind=database.engine)
 KEYCLOAK_URL = "http://keycloak:8080/"
 KEYCLOAK_CLIENT_ID = "boyarkov"
 KEYCLOAK_REALM = "myrealm"
-KEYCLOAK_CLIENT_SECRET = "Sd0kf6dI8mZNBULCJjGUAbcioNK7wCbM"
+KEYCLOAK_CLIENT_SECRET = "T678RfL6Jxtk5zmNQygPAn7ahcTnPzTr"
 
 keycloak_openid = KeycloakOpenID(server_url=KEYCLOAK_URL,
                                   client_id=KEYCLOAK_CLIENT_ID,
