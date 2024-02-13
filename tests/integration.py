@@ -7,7 +7,7 @@ import json
 ticket_url = 'http://localhost:8000'
 statistics_url = 'http://localhost:8001'
 add_ticket_url = f'{ticket_url}/add_ticket'
-get_ticket_by_id_url = f'{ticket_url}/get_ticket_by_id/'
+get_ticket_by_id_url = f'{ticket_url}/get_ticket_by_id'
 
 def check_connect():
     try:
@@ -40,7 +40,7 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
 
     def test_ticket_get(self):
-        res = requests.get(f"{get_ticket_by_id_url}/1").json()
+        res = requests.get(f"{get_ticket_by_id_url}?ticket_id=1").json()
         self.assertTrue('passenger_name' in res.keys())
         self.assertTrue('passport' in res.keys())
         self.assertTrue('id_airplane' in res.keys())
