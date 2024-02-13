@@ -45,7 +45,7 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
 resource = Resource(attributes={
-    SERVICE_NAME: "document-service"
+    SERVICE_NAME: "statistics-service"
 })
 
 jaeger_exporter = JaegerExporter(
