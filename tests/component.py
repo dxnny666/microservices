@@ -1,4 +1,3 @@
-import pytest
 import requests
 import unittest
 
@@ -25,7 +24,7 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(res, "Success")
 
     def test_ticket_get(self):
-        res = requests.get(f"{get_ticket_by_id_url}/{ticket['id']}")
+        res = requests.get(f"{get_ticket_by_id_url}?ticket_id={ticket['id']}")
         data = res.json()
         self.assertEqual(data['passenger_name'], "Boyarkov")
         self.assertEqual(data['passport'], "010101.010101")
