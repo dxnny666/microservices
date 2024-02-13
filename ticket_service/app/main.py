@@ -37,6 +37,7 @@ db_dependency = Annotated[Session, Depends(get_db)]
 
 user_token = ""
 
+
 #######
 #Jaeger
 from opentelemetry import trace
