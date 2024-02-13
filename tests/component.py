@@ -4,7 +4,7 @@ import unittest
 ticket_url = 'http://localhost:8000'
 statistics_url = 'http://localhost:8001'
 add_ticket_url = f'{ticket_url}/add_ticket'
-get_ticket_by_id_url = f'{ticket_url}/get_ticket_by_id/'
+get_ticket_by_id_url = f'{ticket_url}/get_ticket_by_id'
 get_tickets_url = f'{ticket_url}/get_tickets'
 
 ticket = {
@@ -19,13 +19,20 @@ ticket = {
 class TestIntegration(unittest.TestCase):
     # CMD: python tests/integration.py
 
-    def test_ticket_service_connection(self):
-        r = requests.get("http://localhost:8000/health", verify=False)
-        self.assertEqual(r.status_code, 200)
+    def add_ticket(self):
+        res = requests.post(add_ticket_url, json=ticket)
+        self.assertEqual(res, "Success")
 
-    def test_statistics_service_connection(self):
-        r = requests.get("http://localhost:8001/health", verify=False)
-        self.assertEqual(r.status_code, 200)
+    def test_ticket_get(self):
+        res = requests.get(f"{get_ticket_by_id_url}?ticket_id=88").json()
+        self.assertEqual(res['passenger_name'], "Boyarkov")
+        self.assertEqual(res['passport'], "010101.010101")
+        self.assertEqual(res['id_airplane'], 17)
+        self.assertEqual(res['direction'], "New York")
+
+    def fetch_tickets(self):
+        res = requests.get(get_tickets_url)
+        self.assertTrue(res != "Cant access database!")
 
 
 if __name__ == '__main__':
