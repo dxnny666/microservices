@@ -5,7 +5,7 @@ import unittest
 ticket_url = 'https://localhost:8000'
 statistics_url = 'https://localhost:8001'
 add_ticket_url = f'{ticket_url}/add_ticket'
-get_ticket_by_id_url = f'{ticket_url}/doc_by_id/'
+get_ticket_by_id_url = f'{ticket_url}/get_ticket_by_id/'
 get_tickets_url = f'{ticket_url}/get_tickets'
 
 ticket = {
