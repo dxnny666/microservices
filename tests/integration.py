@@ -4,8 +4,8 @@ import psycopg2
 from time import sleep
 import json
 
-ticket_url = 'https://localhost:8000'
-statistics_url = 'https://localhost:8001'
+ticket_url = 'http://localhost:8000'
+statistics_url = 'http://localhost:8001'
 add_ticket_url = f'{ticket_url}/add_ticket'
 get_ticket_by_id_url = f'{ticket_url}/doc_by_id/'
 
