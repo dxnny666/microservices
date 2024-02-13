@@ -31,10 +31,11 @@ async def ticket_alive():
     return {'message': 'service alive'}
 
 
-@app.get("get_tickets")
+@app.get("/get_tickets")
 async def get_tickets(db: db_dependency):
     try:
         result = db.query(Ticket).limit(100).all()
+        return result
     except Exception as e:
         return "cant access database!"
 
@@ -43,6 +44,7 @@ async def get_tickets(db: db_dependency):
 async def get_ticket_by_id(ticket_id: int, db: db_dependency):
     try:
         result = db.query(Ticket).filter(Ticket.id == ticket_id).first()
+        return result
     except Exception as e:
         raise HTTPException(status_code=404, detail="Ticket not found")
     return result
@@ -58,7 +60,7 @@ async def add_ticket(ticket: TicketModel, db: db_dependency):
         db.add(ticket_db)
         db.commit()
         db.refresh(ticket_db)
-        return 1
+        return "Success"
     except Exception:
         return "cant add ticket"
 
@@ -68,6 +70,7 @@ async def delete_ticket(ticket_id: int, db: db_dependency):
     try:
         ticket = db.query(Ticket).filter(Ticket.id == ticket_id).first()
         db.delete(ticket)
+        return "Success"
     except Exception:
         return "cant find ticket"
 
