@@ -46,7 +46,6 @@ async def get_ticket_by_id(ticket_id: int, db: db_dependency):
         return result
     except Exception as e:
         raise HTTPException(status_code=404, detail="Ticket not found")
-    return result
 
 
 @app.post("/add_ticket")
