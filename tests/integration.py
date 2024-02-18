@@ -39,6 +39,7 @@ class TestIntegration(unittest.TestCase):
         r = requests.get("http://localhost:8001/health", verify=False)
         self.assertEqual(r.status_code, 200)
 
+
     def test_ticket_get(self):
         res = requests.get(f"{get_ticket_by_id_url}?ticket_id=1").json()
         self.assertTrue('passenger_name' in res.keys())
