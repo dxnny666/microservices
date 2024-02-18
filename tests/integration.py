@@ -15,7 +15,7 @@ def check_connect():
             dbname='TicketAirport',
             user='postgres',
             password='password',
-            host='localhost',
+            host='database',
             port='5432'
         )
         conn.close()
@@ -32,11 +32,11 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(check_connect(), True)
 
     def test_ticket_service_connection(self):
-        r = requests.get("http://localhost:8000/health", verify=False)
+        r = requests.get("http://ticket_service:8000/health", verify=False)
         self.assertEqual(r.status_code, 200)
 
     def test_statistics_service_connection(self):
-        r = requests.get("http://localhost:8001/health", verify=False)
+        r = requests.get("http://statistics_server:8001/health", verify=False)
         self.assertEqual(r.status_code, 200)
 
     def test_ticket_get(self):
