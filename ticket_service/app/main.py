@@ -38,38 +38,13 @@ db_dependency = Annotated[Session, Depends(get_db)]
 user_token = ""
 
 
-#######
-#Jaeger
-from opentelemetry import trace
-from opentelemetry.exporter.jaeger.thrift import JaegerExporter
-from opentelemetry.sdk.resources import SERVICE_NAME, Resource
-from opentelemetry.sdk.trace import  TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-
-resource = Resource(attributes={
-    SERVICE_NAME: "ticket-service"
-})
-
-jaeger_exporter = JaegerExporter(
-    agent_host_name="jaeger",
-    agent_port=6831
-)
-
-provider = TracerProvider(resource=resource)
-processor = BatchSpanProcessor(jaeger_exporter)
-provider.add_span_processor(processor)
-trace.set_tracer_provider(provider)
-
-FastAPIInstrumentor.instrument_app(app)
-
 ###########
 #Prometheus
 from prometheus_fastapi_instrumentator import Instrumentator
 Instrumentator().instrument(app).expose(app)
 
-@app.post("/get-token")
-async def get_token(username: str = Form(...), password: str = Form(...)):
+@app.post("/login")
+async def login(username: str = Form(...), password: str = Form(...)):
     try:
         # Получение токена
         token = keycloak_openid.token(grant_type=["password"],
