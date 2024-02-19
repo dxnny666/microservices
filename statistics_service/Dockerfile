@@ -11,4 +11,3 @@ COPY ./app /code/app
 EXPOSE 80
 
 CMD ["python", "app/main.py"]
-
