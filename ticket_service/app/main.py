@@ -67,6 +67,7 @@ async def delete_ticket(ticket_id: int, db: db_dependency):
     try:
         ticket = db.query(Ticket).filter(Ticket.id == ticket_id).first()
         db.delete(ticket)
+        db.commit()
         return "Success"
     except Exception as e:
         return "cant find ticket"
