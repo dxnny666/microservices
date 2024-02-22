@@ -30,11 +30,11 @@ jobs:
         run: sleep 10
 
       - name: Run integration test
-        run: python tests/integration.py
+        run: pytest tests/integration
 
 
       - name: Run component test
-        run: pytest tests/integration
+        run: python tests/component.py
 
 
       - name: Clean up (compose down)
