@@ -15,6 +15,7 @@ services:
       - "5432:5432"
 
 
+
   ticket_service:
     restart: on-failure
     container_name: ticket_service
