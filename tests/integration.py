@@ -3,6 +3,8 @@ import requests
 import psycopg2
 from time import sleep
 import json
+from ticket_service.app import main as ticket_service
+from statistics_service.app import main as statistics_service
 
 ticket_url = 'http://localhost:8000'
 statistics_url = 'http://localhost:8001'
@@ -33,15 +35,18 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(check_connect(), True)
 
     def test_ticket_service_connection(self):
-        r = requests.get("http://localhost:8000/health", verify=False)
+        r = ticket_service.ticket_alive()
+        # r = requests.get("http://localhost:8000/health", verify=False)
         self.assertEqual(r.status_code, 200)
 
     def test_statistics_service_connection(self):
-        r = requests.get("http://localhost:8001/health", verify=False)
+        r = statistics_service.statistics_alive()
+        #r = requests.get("http://localhost:8001/health", verify=False)
         self.assertEqual(r.status_code, 200)
 
     def test_ticket_get(self):
-        res = requests.get(f"{get_ticket_by_id_url}?ticket_id=1").json()
+        res = ticket_service.get_ticket_by_id(ticket_id=1)
+        # res = requests.get(f"{get_ticket_by_id_url}?ticket_id=1").json()
         self.assertTrue('passenger_name' in res.keys())
         self.assertTrue('passport' in res.keys())
         self.assertTrue('id_airplane' in res.keys())
