@@ -34,7 +34,7 @@ jobs:
 
 
       - name: Run component test
-        run: python tests/component.py
+        run: pytest tests/integration
 
 
       - name: Clean up (compose down)
