@@ -6,7 +6,6 @@ from sqlalchemy import null
 from sqlalchemy.orm import Session
 from collections import Counter
 
-
 from database import database as database
 from database.database import Ticket
 
