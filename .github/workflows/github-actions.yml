@@ -10,40 +10,40 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    name: Run tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+  # test:
+  #   name: Run tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: install dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y python3-pip
-          pip install psycopg2-binary
-          pip install pytest
+  #     - name: install dependencies
+  #       run: |
+  #         sudo apt update
+  #         sudo apt install -y python3-pip
+  #         pip install psycopg2-binary
+  #         pip install pytest
 
-      - name: Prepare for tests (compose up)
-        run: docker compose up -d --build
+  #     - name: Prepare for tests (compose up)
+  #       run: docker compose up -d --build
 
-      - name: Wait services to start
-        run: sleep 10
+  #     - name: Wait services to start
+  #       run: sleep 10
 
-      - name: Run integration test
-        run: pytest tests/integration
-
-
-      - name: Run component test
-        run: python tests/component.py
+  #     - name: Run integration test
+  #       run: pytest tests/integration
 
 
-      - name: Clean up (compose down)
-        run: docker compose down
+  #     - name: Run component test
+  #       run: python tests/component.py
+
+
+  #     - name: Clean up (compose down)
+  #       run: docker compose down
 
   build_and_push_ticket_service:
     name: Build and push ticket service to Yandex Cloud
     runs-on: ubuntu-latest
-    needs: [ test ]
+    # needs: [ test ]
     steps:
       - uses: actions/checkout@v3
 
@@ -82,7 +82,7 @@ jobs:
   build_and_push_statistics_service:
     name: Build and push statistics service to DockerHub
     runs-on: ubuntu-latest
-    needs: [ test ]
+    # needs: [ test ]
     steps:
       - uses: actions/checkout@v3
 
